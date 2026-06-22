@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PlanetSpark Course Details</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Poppins',sans-serif;
+}
+
+body{
+min-height:100vh;
+background:linear-gradient(-45deg,#6a11cb,#2575fc,#00c9ff,#92fe9d);
+background-size:400% 400%;
+animation:gradientBG 10s ease infinite;
+display:flex;
+justify-content:center;
+align-items:center;
+padding:30px;
+}
+
+@keyframes gradientBG{
+0%{background-position:0% 50%;}
+50%{background-position:100% 50%;}
+100%{background-position:0% 50%;}
+}
+
+.container{
+width:100%;
+max-width:900px;
+background:rgba(255,255,255,0.15);
+backdrop-filter:blur(15px);
+border:1px solid rgba(255,255,255,0.3);
+border-radius:25px;
+padding:35px;
+box-shadow:0 15px 40px rgba(0,0,0,0.2);
+}
+
+.heading{
+text-align:center;
+margin-bottom:30px;
+}
+
+.heading h1{
+font-size:42px;
+font-weight:700;
+color:white;
+text-transform:uppercase;
+letter-spacing:3px;
+text-shadow:0 5px 15px rgba(0,0,0,0.3);
+animation: glow 2s infinite alternate;
+}
+
+@keyframes glow{
+from{
+text-shadow:0 0 10px #fff;
+}
+to{
+text-shadow:0 0 25px #00e5ff,
+0 0 40px #00e5ff;
+}
+}
+
+.subtitle{
+color:white;
+font-size:15px;
+margin-top:8px;
+opacity:0.9;
+}
+
+.student-table{
+width:100%;
+border-collapse:collapse;
+margin-bottom:25px;
+overflow:hidden;
+border-radius:15px;
+}
+
+.student-table th{
+background:#ffffff;
+color:#2575fc;
+padding:15px;
+font-size:18px;
+}
+
+.student-table td{
+padding:15px;
+background:rgba(255,255,255,0.9);
+}
+
+.student-table input{
+width:100%;
+padding:12px;
+border:none;
+outline:none;
+border-radius:10px;
+background:#f4f7ff;
+font-size:15px;
+}
+
+.form-grid{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:20px;
+}
+
+.input-box{
+display:flex;
+flex-direction:column;
+}
+
+.input-box label{
+color:white;
+font-weight:600;
+margin-bottom:8px;
+font-size:15px;
+}
+
+.input-box input{
+padding:14px;
+border:none;
+border-radius:12px;
+font-size:15px;
+background:rgba(255,255,255,0.95);
+outline:none;
+transition:0.3s;
+}
+
+.input-box input:focus{
+transform:scale(1.03);
+box-shadow:0 0 15px rgba(255,255,255,0.7);
+}
+
+.full-width{
+grid-column:span 2;
+}
+
+.discount-section{
+margin-top:30px;
+text-align:center;
+}
+
+.discount-btn{
+padding:15px 40px;
+border:none;
+border-radius:50px;
+font-size:18px;
+font-weight:600;
+cursor:pointer;
+background:linear-gradient(45deg,#ff416c,#ff4b2b);
+color:white;
+transition:0.4s;
+box-shadow:0 10px 20px rgba(0,0,0,0.2);
+}
+
+.discount-btn:hover{
+transform:translateY(-4px) scale(1.05);
+}
+
+.result{
+margin-top:20px;
+font-size:24px;
+font-weight:700;
+color:white;
+}
+
+.footer{
+margin-top:30px;
+text-align:center;
+color:white;
+font-size:14px;
+opacity:0.8;
+}
+
+@media(max-width:768px){
+
+.form-grid{
+grid-template-columns:1fr;
+}
+
+.full-width{
+grid-column:span 1;
+}
+
+.heading h1{
+font-size:28px;
+}
+
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<div class="heading">
+<h1>PlanetSpark Course Details</h1>
+<p class="subtitle">Empowering Communication & Public Speaking Excellence</p>
+</div>
+
+<table class="student-table">
+<tr>
+<th>Child Name</th>
+<th>Grade</th>
+</tr>
+
+<tr>
+<td>
+<input type="text" placeholder="Enter Child Name">
+</td>
+
+<td>
+<input type="text" placeholder="Enter Grade">
+</td>
+</tr>
+</table>
+
+<div class="form-grid">
+
+<div class="input-box">
+<label>No. of Learn Classes</label>
+<input type="number" placeholder="Enter Learn Classes">
+</div>
+
+<div class="input-box">
+<label>No. of Practice Classes</label>
+<input type="number" placeholder="Enter Practice Classes">
+</div>
+
+<div class="input-box">
+<label>No. of Performance Hours</label>
+<input type="number" placeholder="Enter Performance Hours">
+</div>
+
+<div class="input-box">
+<label>Tenure</label>
+<input type="text" placeholder="e.g. 6 Months">
+</div>
+
+<div class="input-box">
+<label>Total Course Fees (₹)</label>
+<input type="number" id="fees" placeholder="Enter Total Fees">
+</div>
+
+<div class="input-box">
+<label>Coupon Code</label>
+<input type="text" id="coupon" placeholder="Enter Coupon Code">
+</div>
+
+</div>
+
+<div class="discount-section">
+
+<button class="discount-btn" onclick="showDiscount()">
+View Discounted Fees
+</button>
+
+<div class="result" id="result">
+Discounted Fees: ₹0
+</div>
+
+</div>
+
+<div class="footer">
+© PlanetSpark Course Information Form
+</div>
+
+</div>
+
+<script>
+
+function showDiscountPopup() {
+
+let couponCode = document.getElementById("coupon").value;
+
+if(couponCode.trim() === ""){
+alert("Please enter a Coupon Code first.");
+return;
+}
+
+let discountedFees = prompt(
+"Enter Discounted Fees for Coupon Code: " + couponCode
+);
+
+if(discountedFees === null || discountedFees === ""){
+return;
+}
+
+document.getElementById("result").innerHTML =
+"Discounted Fees: ₹ " +
+Number(discountedFees).toLocaleString('en-IN');
+
+}
+
+</script>
+
+</body>
+</html>
