@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Final Fees Structure</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Poppins',sans-serif;
+}
+
+body{
+min-height:100vh;
+display:flex;
+justify-content:center;
+align-items:center;
+padding:30px;
+background:linear-gradient(-45deg,#6a11cb,#2575fc,#ff6b6b,#feca57);
+background-size:400% 400%;
+animation:bg 12s ease infinite;
+}
+
+@keyframes bg{
+0%{background-position:0% 50%;}
+50%{background-position:100% 50%;}
+100%{background-position:0% 50%;}
+}
+
+.container{
+width:100%;
+max-width:850px;
+background:rgba(255,255,255,0.15);
+backdrop-filter:blur(20px);
+border-radius:25px;
+padding:40px;
+box-shadow:0 20px 50px rgba(0,0,0,0.2);
+}
+
+h1{
+text-align:center;
+color:white;
+font-size:38px;
+margin-bottom:30px;
+text-shadow:0 0 15px rgba(255,255,255,0.8);
+}
+
+.section{
+margin-bottom:25px;
+}
+
+label{
+display:block;
+color:white;
+font-weight:600;
+margin-bottom:8px;
+}
+
+input,select{
+width:100%;
+padding:14px;
+border:none;
+border-radius:12px;
+font-size:15px;
+outline:none;
+}
+
+.fee-box{
+background:rgba(255,255,255,0.15);
+padding:20px;
+border-radius:15px;
+margin-top:15px;
+}
+
+#emiSection{
+display:none;
+animation:fadeIn .5s ease;
+}
+
+@keyframes fadeIn{
+from{
+opacity:0;
+transform:translateY(15px);
+}
+to{
+opacity:1;
+transform:translateY(0);
+}
+}
+
+.grid{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:15px;
+}
+
+.btn{
+width:100%;
+padding:16px;
+border:none;
+border-radius:50px;
+margin-top:25px;
+font-size:18px;
+font-weight:600;
+cursor:pointer;
+background:linear-gradient(45deg,#ff6b6b,#ff9f43);
+color:white;
+transition:.3s;
+}
+
+.btn:hover{
+transform:translateY(-4px);
+}
+
+.note{
+text-align:center;
+margin-top:15px;
+color:white;
+opacity:.9;
+}
+
+@media(max-width:768px){
+
+.grid{
+grid-template-columns:1fr;
+}
+
+h1{
+font-size:30px;
+}
+
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>Final Fees Structure</h1>
+
+<div class="section">
+<label>Total Final Fees</label>
+<input type="text" placeholder="Enter Final Fees">
+</div>
+
+<div class="section">
+<label>Mode of Payment</label>
+
+<select id="paymentMode" onchange="showEMI()">
+<option value="">Select Payment Mode</option>
+<option value="oneTime">One Time Payment</option>
+<option value="emi">No Cost EMI</option>
+</select>
+
+</div>
+
+<div id="emiSection">
+
+<div class="fee-box">
+
+<h2 style="color:white; text-align:center; margin-bottom:20px;">
+No Cost EMI Details
+</h2>
+
+<div class="grid">
+
+<div>
+<label>REG FEES</label>
+<input type="text" placeholder="Enter Registration Fees">
+</div>
+
+<div>
+<label>REM FEES</label>
+<input type="text" placeholder="Enter Remaining Fees">
+</div>
+
+<div>
+<label>9 MONTHS EMI</label>
+<input type="text" placeholder="Enter 9 Months EMI">
+</div>
+
+<div>
+<label>12 MONTHS EMI</label>
+<input type="text" placeholder="Enter 12 Months EMI">
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<button class="btn">
+Confirm Payment Structure
+</button>
+
+<div class="note">
+PlanetSpark • Learn • Practice • Perform
+</div>
+
+</div>
+
+<script>
+
+function showEMI(){
+
+let mode = document.getElementById("paymentMode").value;
+let emiSection = document.getElementById("emiSection");
+
+if(mode === "emi"){
+emiSection.style.display = "block";
+}
+else{
+emiSection.style.display = "none";
+}
+
+}
+
+</script>
+
+</body>
+</html>
