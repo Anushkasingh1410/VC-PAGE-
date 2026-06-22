@@ -8,7 +8,6 @@
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
 <style>
-
 *{
 margin:0;
 padding:0;
@@ -60,13 +59,8 @@ animation: glow 2s infinite alternate;
 }
 
 @keyframes glow{
-from{
-text-shadow:0 0 10px #fff;
-}
-to{
-text-shadow:0 0 25px #00e5ff,
-0 0 40px #00e5ff;
-}
+from{text-shadow:0 0 10px #fff;}
+to{text-shadow:0 0 25px #00e5ff,0 0 40px #00e5ff;}
 }
 
 .subtitle{
@@ -181,21 +175,10 @@ opacity:0.8;
 }
 
 @media(max-width:768px){
-
-.form-grid{
-grid-template-columns:1fr;
+.form-grid{grid-template-columns:1fr;}
+.full-width{grid-column:span 1;}
+.heading h1{font-size:28px;}
 }
-
-.full-width{
-grid-column:span 1;
-}
-
-.heading h1{
-font-size:28px;
-}
-
-}
-
 </style>
 </head>
 
@@ -213,20 +196,13 @@ font-size:28px;
 <th>Child Name</th>
 <th>Grade</th>
 </tr>
-
 <tr>
-<td>
-<input type="text" placeholder="Enter Child Name">
-</td>
-
-<td>
-<input type="text" placeholder="Enter Grade">
-</td>
+<td><input type="text" placeholder="Enter Child Name"></td>
+<td><input type="text" placeholder="Enter Grade"></td>
 </tr>
 </table>
 
 <div class="form-grid">
-
 <div class="input-box">
 <label>No. of Learn Classes</label>
 <input type="number" placeholder="Enter Learn Classes">
@@ -256,19 +232,17 @@ font-size:28px;
 <label>Coupon Code</label>
 <input type="text" id="coupon" placeholder="Enter Coupon Code">
 </div>
-
 </div>
 
 <div class="discount-section">
-
-<button class="discount-btn" onclick="showDiscount()">
-View Discounted Fees
-</button>
+    <button class="discount-btn" onclick="window.location.href='fees.html'">
+        View Discounted Fees
+    </button>
+</div>
 
 <div class="result" id="result">
 Discounted Fees: ₹0
 </div>
-
 </div>
 
 <div class="footer">
@@ -278,30 +252,52 @@ Discounted Fees: ₹0
 </div>
 
 <script>
+function showDiscount() {
+    let baseFees = parseFloat(document.getElementById("fees").value);
+    let couponCode = document.getElementById("coupon").value.trim().toUpperCase();
 
-function showDiscountPopup() {
+    // Validation: Check if original fees are entered
+    if (isNaN(baseFees) || baseFees <= 0) {
+        alert("Please enter a valid Total Course Fee first.");
+        return;
+    }
 
-let couponCode = document.getElementById("coupon").value;
+    // Validation: Check if coupon code is entered
+    if (couponCode === "") {
+        alert("Please enter a Coupon Code first.");
+        return;
+    }
 
-if(couponCode.trim() === ""){
-alert("Please enter a Coupon Code first.");
-return;
+    /* "BACKEND" LOGIC CONFIGURATION
+       You can add or modify your hidden codes and their discount rates here.
+       0.10 means 10% off, 0.25 means 25% off, etc.
+    */
+    const couponDatabase = {
+        "SPARK10": 0.10,
+        "SPARK20": 0.20,
+        "WELCOME50": 0.50,
+        "FREEBIE": 1.00
+    };
+
+    let discountPercentage = 0;
+
+    // Check if the coupon exists in our hidden list
+    if (couponDatabase.hasOwnProperty(couponCode)) {
+        discountPercentage = couponDatabase[couponCode];
+    } else {
+        alert("Invalid Coupon Code! No discount applied.");
+        document.getElementById("result").innerHTML = "Discounted Fees: ₹" + baseFees.toLocaleString('en-IN');
+        return;
+    }
+
+    // Calculate final calculated price
+    let discountAmount = baseFees * discountPercentage;
+    let finalFees = baseFees - discountAmount;
+
+    // Update the UI smoothly
+    document.getElementById("result").innerHTML = 
+        "Discounted Fees: ₹ " + Math.round(finalFees).toLocaleString('en-IN');
 }
-
-let discountedFees = prompt(
-"Enter Discounted Fees for Coupon Code: " + couponCode
-);
-
-if(discountedFees === null || discountedFees === ""){
-return;
-}
-
-document.getElementById("result").innerHTML =
-"Discounted Fees: ₹ " +
-Number(discountedFees).toLocaleString('en-IN');
-
-}
-
 </script>
 
 </body>
